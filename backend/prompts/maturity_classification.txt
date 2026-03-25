@@ -1,0 +1,19 @@
+You are an expert at assessing the maturity of AI products.
+
+Given the following product context, classify this product as either "draft" or "production".
+
+Product Context:
+{context}
+
+Classification criteria:
+- "draft": Early prototype, proof of concept, MVP in development, no real users yet, internal tool being tested, hackathon project, demo application
+- "production": Live application with real users, deployed to production environment, has monitoring/logging, established user base, has SLAs or uptime requirements
+
+Consider signals like:
+- Does the context mention real users, customers, or paying users? → production
+- Does it mention production deployment, cloud infrastructure, monitoring? → production
+- Does it mention "prototype", "MVP", "demo", "proof of concept", "testing"? → draft
+- Does the tech stack include production-grade infra (Kubernetes, load balancers, CDNs)? → production
+- Is the feature set minimal/exploratory? → draft
+
+Return ONLY one of these two strings: "draft" or "production"

@@ -1,0 +1,126 @@
+You are an expert in AI evaluation design with deep knowledge of LLM evaluation frameworks, including RAGAS, LangSmith, Braintrust, and academic research like SteerLM.
+
+You will generate a comprehensive evaluation framework document for the following AI product.
+
+## Product Context
+{context}
+
+## Maturity Level
+{maturity}
+
+## User-Defined Evaluation Priorities
+The user has rated the following attributes by importance (1=low, 5=critical):
+{attribute_weights}
+
+Priority order (most important first):
+{priority_order}
+
+## Additional Context from Questionnaire
+{questionnaire_answers}
+
+---
+
+Generate a complete evaluation framework in the following markdown structure. Follow this EXACTLY:
+
+# Eval Framework: {product_name}
+**Generated:** {date}
+**Maturity Level:** {maturity_label}
+**Domain:** {domain}
+
+---
+
+## Executive Summary
+
+[Write 2-3 sentences summarizing: what kind of product this is, what the key eval risks are, and what the user should focus on first.]
+
+---
+
+## Phase 1: Core Functional Evals (Start Here)
+
+### Deterministic Evals
+
+[For each deterministic eval, use this format:]
+
+#### [Eval Name]
+- **What it measures:** [specific description]
+- **How to implement:** [concrete implementation — name the assertion library, metric, or test pattern. Be specific.]
+- **SLA / Threshold:** [specific number with unit, e.g., "P95 < 2.5 seconds", "F1 score > 0.85", "100% schema conformance"]
+- **Priority:** [Critical | High | Medium]
+- **Estimated effort:** [Low | Medium | High]
+
+[Include at minimum these categories if applicable: response format/schema validation, task completion rate, factual accuracy or groundedness (if RAG), latency baseline, error/exception rate]
+
+### Non-Deterministic Evals
+
+[For each prioritized attribute (rating 3+), use this format:]
+
+#### [Attribute Name] Quality
+- **Scoring dimensions:** [list the sub-dimensions being evaluated]
+- **Rubric:**
+  - 5 (Excellent): [what does a 5 look like — be specific and concrete]
+  - 4 (Good): [what does a 4 look like]
+  - 3 (Acceptable): [what does a 3 look like — minimum bar]
+  - 2 (Poor): [what does a 2 look like]
+  - 1 (Failing): [what does a 1 look like]
+- **Suggested test prompts:**
+  1. [specific test prompt for this attribute]
+  2. [specific test prompt for this attribute]
+  3. [specific test prompt for this attribute]
+- **LLM judge instructions:** [Write a paragraph instructing an LLM judge how to evaluate this attribute. Be specific about what to look for and what to penalize.]
+
+---
+
+{phase_2_section}
+
+---
+
+## Implementation Roadmap
+
+| Eval | Priority | Effort | Phase | Attribute |
+|------|----------|--------|-------|-----------|
+[Fill in one row per eval]
+
+---
+
+## Recommended Tools
+
+[List 3-5 tools that fit this specific use case, with a one-sentence explanation of why each is relevant. Choose from: RAGAS, DeepEval, Braintrust, LangSmith, PromptFoo, Weights & Biases, Arize, Evidently AI, OpenAI Evals, or others that genuinely fit.]
+
+---
+
+## Next Steps
+
+1. [Most important first action]
+2. [Second action]
+3. [Third action]
+4. [Fourth action]
+5. [Fifth action]
+
+---
+
+## PHASE 2 TEMPLATE (only include if maturity is "production"):
+
+## Phase 2: Non-Functional & Edge Case Evals
+
+### Latency & Performance
+
+#### Response Latency SLA
+- **What it measures:** End-to-end response time under realistic load
+- **How to implement:** Load test with k6 or Locust targeting your production endpoint; measure P50, P95, P99
+- **SLA / Threshold:** P95 < 3s (synchronous), P95 < 30s (async/streaming)
+- **Priority:** High
+- **Estimated effort:** Medium
+
+[Add more performance evals specific to this product]
+
+### Safety & Reliability
+
+[Generate safety evals relevant to the domain — include prompt injection resistance if applicable, refusal quality if the system should decline certain requests, bias/fairness checks if rated 3+ by user]
+
+### Edge Cases & Regression
+
+[Generate 3-5 edge case eval categories specific to this product's domain and modality]
+
+---
+
+Write the complete document now. Be specific, concrete, and tailored to THIS product — avoid generic advice.

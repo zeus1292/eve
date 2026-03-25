@@ -1,0 +1,18 @@
+You are an expert at analyzing AI product descriptions and extracting structured information.
+
+Given the following product context, extract the key information and return it as JSON.
+
+Product Context:
+{input_text}
+
+Return a JSON object with these exact fields:
+- product_name: string (the name of the product or application)
+- domain: string (the business domain, e.g., "customer support", "code generation", "healthcare", "e-commerce")
+- ai_modality: array of strings (types of AI used, e.g., ["RAG", "text generation", "classification", "summarization", "image generation"])
+- tech_stack: array of strings (technologies mentioned, e.g., ["Python", "FastAPI", "React", "PostgreSQL", "OpenAI"])
+- key_features: array of strings (main features or capabilities of the product)
+- intended_users: string (who uses this product, e.g., "enterprise sales teams", "developers", "end consumers")
+- maturity_hint: string or null ("draft"/"prototype" if early-stage signals detected, "production" if live/deployed signals detected, null if unclear)
+- raw_summary: string (a 2-3 sentence plain English summary of what this product does)
+
+Return ONLY the JSON object, no other text.

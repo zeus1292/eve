@@ -1,0 +1,18 @@
+You are an expert software engineer analyzing a codebase to understand what kind of AI application it is.
+
+Given the following files from a Git repository, extract structured information about the application.
+
+Repository Files:
+{repo_content}
+
+Return a JSON object with these exact fields:
+- product_name: string (inferred from README, package.json name, or directory structure)
+- domain: string (the business domain this application serves)
+- ai_modality: array of strings (AI techniques used — look for imports like openai, anthropic, langchain, transformers, huggingface, vector DBs like pinecone/chroma/weaviate, embedding calls, LLM calls)
+- tech_stack: array of strings (frameworks and technologies detected from imports, config files, and dependencies)
+- key_features: array of strings (inferred from README, route handlers, or function names)
+- intended_users: string (inferred from README or product description)
+- maturity_hint: string ("draft" if no deployment config or early README language; "production" if CI/CD, docker-compose, or deployment configs detected)
+- raw_summary: string (2-3 sentence summary of what this codebase does)
+
+Return ONLY the JSON object, no other text.
