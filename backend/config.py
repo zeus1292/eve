@@ -1,7 +1,9 @@
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env")
+
     anthropic_api_key: str
     cors_origins: str = "http://localhost:3000"
     max_file_size_mb: int = 10
@@ -11,9 +13,6 @@ class Settings(BaseSettings):
     @property
     def cors_origins_list(self) -> list[str]:
         return [o.strip() for o in self.cors_origins.split(",")]
-
-    class Config:
-        env_file = ".env"
 
 
 settings = Settings()

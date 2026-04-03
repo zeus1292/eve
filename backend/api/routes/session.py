@@ -1,12 +1,16 @@
-from fastapi import APIRouter, HTTPException
-from models.session import SessionState, SessionStatus
+from fastapi import APIRouter, HTTPException, Request
+from slowapi import Limiter
+from slowapi.util import get_remote_address
+from models.session import SessionState
 from services.storage.session_store import session_store
 
 router = APIRouter(prefix="/session", tags=["session"])
+limiter = Limiter(key_func=get_remote_address)
 
 
 @router.post("")
-async def create_session():
+@limiter.limit("10/hour")
+async def create_session(request: Request):
     session = SessionState()
     await session_store.create(session)
     return {"session_id": session.session_id, "status": session.status}

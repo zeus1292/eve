@@ -4,8 +4,7 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from models.session import SessionState
-from models.questionnaire import Question, QuestionnaireState
-from services.questionnaire.steerlm_attributes import STAGES, FUNCTIONAL_ATTRIBUTES, NON_FUNCTIONAL_ATTRIBUTES
+from models.questionnaire import Question
 from services.questionnaire.question_bank import FALLBACK_QUESTIONS
 from services.orchestration.maturity_classifier import MaturityClassifier
 from config import settings
@@ -42,7 +41,7 @@ class QuestionnaireEngine:
             "maturity_suggestion": await self._classifier.classify(session.context) if session.context else "draft",
         }
 
-    async def advance(self, session: SessionState, completed_stage: str, answers: dict) -> dict:
+    async def advance(self, session: SessionState, completed_stage: str, _answers: dict) -> dict:
         """Process answers for a completed stage and return next stage info."""
         current_idx = STAGE_SEQUENCE.index(completed_stage) if completed_stage in STAGE_SEQUENCE else 0
         next_stage = STAGE_SEQUENCE[min(current_idx + 1, len(STAGE_SEQUENCE) - 1)]
